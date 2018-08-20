@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sqltest.mapper.nhtest.Pq_FactoryMapper">
+  <resultMap id="BaseResultMap" type="com.sqltest.entity.nhtest.Pq_Factory">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="GUID" jdbcType="VARCHAR" property="guid" />
+    <result column="pqcode" jdbcType="VARCHAR" property="pqcode" />
+    <result column="factorycode" jdbcType="VARCHAR" property="factorycode" />
+  </resultMap>
+</mapper>

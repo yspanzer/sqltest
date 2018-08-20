@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sqltest.mapper.nanhuadata.TFactoryMapper">
+  <resultMap id="BaseResultMap" type="com.sqltest.entity.nanhuadata.TFactory">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="AllName" jdbcType="VARCHAR" property="allname" />
+    <result column="Sort" jdbcType="INTEGER" property="sort" />
+    <result column="pq" jdbcType="NCHAR" property="pq" />
+  </resultMap>
+</mapper>
