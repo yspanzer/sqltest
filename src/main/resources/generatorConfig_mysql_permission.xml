@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+<!--
+    <classPathEntry location="/opt/repository/mysql/mysql-connector-java/mysql-connector-java-5.1.30.jar" />
+-->
+
+    <context id="SqlServer" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <!-- 根据Mapper生成实体类,xml文件 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <!-- com.sqltest.util.MyMapper为项目内扩展接口， com.sqltest为项目包名，util为项目内的包，MyMapper为包内建立的扩展接口-->
+            <property name="mappers" value="com.sqltest.util.MySqlMapper"/>
+        </plugin>
+
+        <!-- 		<property name="beginningDelimiter" value="`"/>
+              <property name="endingDelimiter" value="`"/>
+              <property name="mergeable" value="false"></property> -->
+
+        <!-- 连接字符串 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://172.16.29.181:3306/permission"
+                        userId="root"
+                        password="ys227311">
+
+            <!-- 针对mysql数据库 -->
+<!--            <property name="useInformationSchema" value="true"/>
+            -->
+        </jdbcConnection>
+
+
+        <!-- 指定生成“entity实体类、mybatis映射xml文件、mapper接口”的具体位置 -->
+        <javaModelGenerator targetPackage="${targetModelPackagePermission}" targetProject="${targetJavaProject}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${targetXMLPackagePermission}" targetProject="${targetResourcesProject}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="${targetMapperPackagePermission}" targetProject="${targetJavaProject}" type="XMLMAPPER">
+            <!--是否允许建立子包（对应MySql的scheme）-->
+            <!--<property name="enableSubPackages" value="true"/>-->
+        </javaClientGenerator>
+
+
+        <table tableName="user_info" domainObjectName="user_info">
+        </table>
+        <table tableName="sys_role" domainObjectName="sys_role">
+        </table>
+        <table tableName="sys_permission" domainObjectName="sys_permission">
+        </table>
+        <table tableName="sys_user_role" domainObjectName="sys_user_role">
+        </table>
+        <table tableName="sys_role_permission" domainObjectName="sys_role_permission">
+        </table>
+
+    </context>
+</generatorConfiguration>

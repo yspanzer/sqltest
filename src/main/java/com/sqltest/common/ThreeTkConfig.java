@@ -4,35 +4,29 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.github.pagehelper.PageHelper;
-
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
 @Configuration
-public class TwoTkConfig {
+public class ThreeTkConfig {
 
     //改造DataSource，以装配Druid
-    @Bean(name = "TwoTkDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.two.druid")
-    public DataSource TwoTkDataSource() {
+    @Bean(name = "ThreeTkDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.three.druid")
+    public DataSource ThreeTkDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         return dataSource;
     }
@@ -59,8 +53,8 @@ public class TwoTkConfig {
     }
 
 
-    @Bean(name = "TwoTkSqlSessionFactory")
-    public SqlSessionFactory TwoTkSqlSessionFactory(@Qualifier("TwoTkDataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "ThreeTkSqlSessionFactory")
+    public SqlSessionFactory ThreeTkSqlSessionFactory(@Qualifier("ThreeTkDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
 
@@ -88,21 +82,22 @@ public class TwoTkConfig {
         bean.setPlugins(new Interceptor[]{pageHelper});
 
         //添加XML目录
-        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/nhtest/*.xml"));
+        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/permission/*.xml"));
         return bean.getObject();
     }
 
-    @Bean(name = "TwoTkSqlSessionTemplate")
-    public SqlSessionTemplate TwoTkSqlSessionTemplate(@Qualifier("TwoTkSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    @Bean(name = "ThreeTkSqlSessionTemplate")
+    public SqlSessionTemplate ThreeTkSqlSessionTemplate(@Qualifier("ThreeTkSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
     //增加事务
-    @Bean(name = "TwoTkTransactionManager")
-    public DataSourceTransactionManager TwoTkTransactionManager(@Qualifier("TwoTkDataSource") DataSource dataSource) {
+    @Bean(name = "ThreeTkTransactionManager")
+    public DataSourceTransactionManager ThreeTkTransactionManager(@Qualifier("ThreeTkDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
 
 }
+
 

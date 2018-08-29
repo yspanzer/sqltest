@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sqltest.mapper.permission.sys_permissionMapper">
+  <resultMap id="BaseResultMap" type="com.sqltest.entity.permission.sys_permission">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_uuid" jdbcType="VARCHAR" property="parentUuid" />
+    <result column="parent_uuids" jdbcType="VARCHAR" property="parentUuids" />
+    <result column="resourcetype" jdbcType="VARCHAR" property="resourcetype" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="available" jdbcType="TINYINT" property="available" />
+  </resultMap>
+</mapper>

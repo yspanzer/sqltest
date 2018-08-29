@@ -35,6 +35,11 @@
         <targetMapperPackageNhtest>com.sqltest.mapper.nhtest</targetMapperPackageNhtest>
         <targetModelPackageNhtest>com.sqltest.entity.nhtest</targetModelPackageNhtest>
 
+        <!-- （第三个数据连接）Java接口和实体类 -->
+        <targetMapperPackagePermission>com.sqltest.mapper.permission</targetMapperPackagePermission>
+        <targetModelPackagePermission>com.sqltest.entity.permission</targetModelPackagePermission>
+
+
         <!-- XML生成路径 基础路径 -->
         <targetResourcesProject>${basedir}/src/main/resources/mybatis</targetResourcesProject>
         <!--映射XML路径-->
@@ -42,6 +47,10 @@
 
         <!--（第二个数据连接）映射XML路径-->
         <targetXMLPackageNhtest>mapper.nhtest</targetXMLPackageNhtest>
+
+        <!--（第三个数据连接）映射XML路径-->
+        <targetXMLPackagePermission>mapper.permission</targetXMLPackagePermission>
+
 
         <!-- 依赖版本 -->
         <sqljdbc.version>4.0</sqljdbc.version>
@@ -52,10 +61,14 @@
         <mybatis.version>3.3.1</mybatis.version>
         -->
         <mybatis.spring.version>1.3.2</mybatis.spring.version>
-<!--
+
         <mysql.version>5.1.30</mysql.version>
-        -->
+
         <mybatis.generator.version>1.3.5</mybatis.generator.version>
+
+        <pagehelper.version>4.2.0</pagehelper.version>
+        <druid.version>1.1.10</druid.version>
+        <shiro.version>1.4.0</shiro.version>
 
         <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
 
@@ -86,6 +99,12 @@
             <version>${sqljdbc.version}</version>
         </dependency>
 
+        <!-- MySql 连接依赖包 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
 
         <!-- 排除TOMCAT信息打包 -->
         <dependency>
@@ -120,14 +139,14 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-            <version>4.2.0</version>
+            <version>${pagehelper.version}</version>
         </dependency>
 
         <!-- druid数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.10</version>
+            <version>${druid.version}</version>
         </dependency>
 
         <!---->
@@ -135,6 +154,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>-->
+
+        <!--thymeleaf网页框架依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!--shiro-spring依赖-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
 
 
     </dependencies>
@@ -157,11 +189,20 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>${mybatis.generator.version}</version>
                 <dependencies>
+
                     <!-- microsoft.sqlserver 连接依赖包 -->
+<!--
                     <dependency>
                         <groupId>com.microsoft.sqlserver</groupId>
                         <artifactId>sqljdbc4</artifactId>
                         <version>${sqljdbc.version}</version>
+                    </dependency>
+-->
+                    <!-- MySql 连接依赖包 -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
                     </dependency>
 
                     <!--集成通用mapper-->
@@ -179,7 +220,12 @@
                     <configurationFile>src/main/resources/generatorConfig_sqlserver_nanhuadata.xml</configurationFile>
 -->
 
+<!--
                     <configurationFile>src/main/resources/generatorConfig_sqlserver_factorytest.xml</configurationFile>
+-->
+
+                    <configurationFile>src/main/resources/generatorConfig_mysql_permission.xml</configurationFile>
+
 
                     <!--允许移动生成的文件 -->
                     <verbose>true</verbose>
